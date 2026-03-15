@@ -1,9 +1,9 @@
-import { AppBar } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function Footer() {
     return (
-<AppBar>
-    
-</AppBar>
+<Box position="fixed" bottom="0">
+    Footer placeholder
+</Box>
     );
 }

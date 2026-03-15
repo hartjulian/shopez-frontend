@@ -1,16 +1,12 @@
 import Layout from "../components/Layout";
-import { Typography } from "@mui/material";
+import Hero from "../components/Hero"
+// import FeaturedProducts from "../components/FeaturedProducts"
 
 export default function Home() {
   return (
     <Layout>
-      <Typography variant="h3" gutterBottom>
-        Welcome to ShopEZ
-      </Typography>
-
-      <Typography>
-        Easy Shopping, Smart Choices!
-      </Typography>
+      <Hero />
+      {/* <FeaturedProducts /> */}
     </Layout>
   );
 }
