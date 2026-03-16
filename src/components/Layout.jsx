@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <Box>
       <Navbar />
-      <Container sx={{ mt: 4 }}>{children}</Container>
+      <Container maxWidth="xl" sx={{ mt: 4 }}>{children}</Container>
       {/* <Footer /> */}
     </Box>
   );
