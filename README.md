@@ -14,7 +14,7 @@ This project is part of my learning pathway on Codecademy.com - Full Stack Engin
 - MUI
 
 ## Features
-### Completed
+### Completed (with mock data)
 - User can view all available products, including image, description, price
 - User can view a selected product with additional product details
 ### In Progress / Future
