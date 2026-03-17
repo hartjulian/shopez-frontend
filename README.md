@@ -14,12 +14,12 @@ This project is part of my learning pathway on Codecademy.com - Full Stack Engin
 - MUI
 
 ## Features
-
-### In Progress / Future
-- User can login and authorisation using Username / Password
-- User can login and authorisation using third party (Google, Facebook)
+### Completed (with mock data)
 - User can view all available products, including image, description, price
 - User can view a selected product with additional product details
+### In Progress / Future
+- User login and authorisation using Username / Password
+- User login and authorisation using third party (Google, Facebook)
 - User can add a product to a cart
 - User can remove a product from their cart
 - User can checkout their cart (No real payment integration etc.)
