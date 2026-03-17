@@ -36,6 +36,7 @@ export default function ProductCard({ product }) {
                     />
                 </Box>
                 <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography fontWeight={"bold"} textTransform={"uppercase"}>{product.brand}</Typography>
                     <Typography
                         variant="h6"
                         gutterBottom
