@@ -11,7 +11,7 @@ export default function Navbar() {
                 <IconButton >
                     <Menu />
                 </IconButton>
-                <Image src="/src/assets/ShopEZ_logo_plain.png" height="64px" fit="contain" duration="0" onClick={() => navigate("/")} sx={{cursor: "pointer"}}/>
+                <Image src="../../src/assets/ShopEZ_logo_plain.png" height="64px" fit="contain" duration="0" onClick={() => navigate("/")} sx={{cursor: "pointer"}}/>
                 <IconButton >
                     <Search />
                 </IconButton>
