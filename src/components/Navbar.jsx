@@ -3,6 +3,8 @@ import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
 import { Image } from 'mui-image';
 import { useNavigate } from "react-router-dom";
 
+import logoPlain from "/src/assets/ShopEZ_logo_plain.png"
+
 export default function Navbar() {
     const navigate = useNavigate();
     return (
@@ -11,7 +13,7 @@ export default function Navbar() {
                 <IconButton >
                     <Menu />
                 </IconButton>
-                <Image src="../../src/assets/ShopEZ_logo_plain.png" height="64px" fit="contain" duration="0" onClick={() => navigate("/")} sx={{cursor: "pointer"}}/>
+                <Image src={logoPlain} height="64px" fit="contain" duration="0" onClick={() => navigate("/")} sx={{cursor: "pointer"}}/>
                 <IconButton >
                     <Search />
                 </IconButton>
