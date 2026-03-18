@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
                 <Box sx={{ overflow: "hidden" }}>
                     <CardMedia
                         component="img"
-                        image={product.image}
+                        image={product.image_url}
                         alt={product.name}
                         sx={{
                             aspectRatio: "1 / 1",
@@ -54,7 +54,7 @@ export default function ProductCard({ product }) {
                         sx={{ fontWeight: 600 }}
                         color="primary"
                     >
-                        ${product.price}
+                        ${product.price/100}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -62,7 +62,7 @@ export default function ProductCard({ product }) {
                 <Button
                     variant="contained"
                     fullWidth
-                    onClick={() => console.log("Add to card", product.id)}
+                    onClick={() => console.log("Add to cart", product.id)}
                 >
                     Add to Cart
                 </Button>
