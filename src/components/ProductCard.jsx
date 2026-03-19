@@ -1,6 +1,8 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
+
 export default function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -23,11 +25,11 @@ export default function ProductCard({ product }) {
                 <Box sx={{ overflow: "hidden" }}>
                     <CardMedia
                         component="img"
-                        image={product.image_url}
+                        image={(product.image_url ? product.image_url : defaultImage)}
                         alt={product.name}
                         sx={{
                             aspectRatio: "1 / 1",
-                            objectFit: "cover",
+                            objectFit: "scale-down",
                             transition: "transform 0.4s ease",
                             "&:hover": {
                                 transform: "scale(1.15)"
@@ -44,21 +46,22 @@ export default function ProductCard({ product }) {
                             display: "-webkit-box",
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: "vertical",
-                            overflow: "hidden"
+                            overflow: "hidden",
+                            minHeight: "3.2em"
                         }}
                     >
                         {product.name}
                     </Typography>
                     <Typography
                         variant="h6"
-                        sx={{ fontWeight: 600 }}
+                        sx={{ fontWeight: 600, mt: 1 }}
                         color="primary"
                     >
                         ${product.price/100}
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <Box sx={{ p:2, pt: 0 }}>
+            <Box sx={{ p:2, pt: 0, mt: "auto" }}>
                 <Button
                     variant="contained"
                     fullWidth

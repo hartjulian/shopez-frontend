@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import ProductGrid from "../components/ProductGrid";
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/products";
+import { Container, Typography } from "@mui/material";
 
 
 export default function Products() {
@@ -12,21 +13,27 @@ export default function Products() {
 
   useEffect(() => {
     getProducts()
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
+      .then(data => setProducts(data))
       .catch(err => {
         setError(err.message);
         setLoading(false);
-      });
+      })
+      .then(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return (
+    <Layout>
+      <Container sx={{ py: 10 }} align="center">
+        <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Something went wrong</Typography>
+      </Container>
+    </Layout>
+  )
   return (
     <Layout>
-      <ProductGrid products={products} />
+      <ProductGrid
+        products={loading ? Array.from(new Array(3)) : products}
+        isLoading={loading}
+      />
     </Layout>
   );
 }
