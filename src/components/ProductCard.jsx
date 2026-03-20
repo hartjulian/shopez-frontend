@@ -26,6 +26,9 @@ export default function ProductCard({ product }) {
                     <CardMedia
                         component="img"
                         image={(product.image_url ? product.image_url : defaultImage)}
+                        onError={(e) => {
+                            e.target.src=defaultImage;
+                        }}
                         alt={product.name}
                         sx={{
                             aspectRatio: "1 / 1",
@@ -57,7 +60,7 @@ export default function ProductCard({ product }) {
                         sx={{ fontWeight: 600, mt: 1 }}
                         color="primary"
                     >
-                        ${product.price/100}
+                        ${(product.price/100).toFixed(2)}
                     </Typography>
                 </CardContent>
             </CardActionArea>
