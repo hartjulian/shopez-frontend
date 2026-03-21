@@ -1,15 +1,37 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, CardMedia, Container, Grid, Typography } from "@mui/material";
 import Layout from "../components/Layout";
+import { getProductById } from "../api/products";
 
-// Remove this mock data after the express backend is wired up.
-import mockProducts from "../mocks/mockData";
+import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
+
 
 export default function ProductDetails() {
     const { id } = useParams();
-    const product = mockProducts.find(p => p.id === Number(id));
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getProductById(id)
+            .then(data => setProduct(data))
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            })
+            .then(() => setLoading(false));
+    }, []);
+    // Error case - e.g. API unavailable
+    if (error) return (
+        <Layout>
+            <Container sx={{ py: 10 }} align="center">
+                <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Something went wrong</Typography>
+            </Container>
+        </Layout>
+    );
+    // Valid non-error case where product isn't found. Perhaps user has copied or modified a link incorrectly
     if (!product) {
         return (
             <Layout>
@@ -28,11 +50,12 @@ export default function ProductDetails() {
             </Layout>
         )
     };
+    // Happy path
     return (
         <Layout>
             <Grid container spacing={8} justifyContent={"center"}>
                 {/* Image */}
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12 ,  md: 6 }}>
                     <Box
                         sx={{
                             width: "100%",
@@ -44,19 +67,22 @@ export default function ProductDetails() {
                     >
                         <CardMedia
                             component="img"
-                            image={product.image}
+                            image={product.image_url ? product.image_url : defaultImage}
+                            onError={(e) => {
+                                e.target.src = defaultImage;
+                            }}
                             alt={product.name}
                             sx={{
                                 width: "100%",
                                 aspectRatio: "1 / 1",
-                                objectFit: "cover"
+                                objectFit: "scale-down"
                             }}
                         />
                     </Box>
                 </Grid>
                 {/* Details */}
-                <Grid item xs={12} md={6}>
-                    <Box sx={{maxWidth: 500}}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                    <Box sx={{ maxWidth: 500 }}>
                         <Typography variant="h6" textTransform="uppercase" gutterBottom>{product.brand}</Typography>
                         <Typography variant="h4" gutterBottom>
                             {product.name}
@@ -66,7 +92,7 @@ export default function ProductDetails() {
                             color="primary"
                             sx={{ fontWeight: 600, mb: 2 }}
                         >
-                            ${product.price}
+                            ${(product.price / 100).toFixed(2)}
                         </Typography>
                         <Button
                             variant="contained"
@@ -75,7 +101,7 @@ export default function ProductDetails() {
                             onClick={() => console.log("Add to cart", product.id)}
                         >
                             Add to Cart
-                        </Button>                        
+                        </Button>
                         <Typography sx={{ whiteSpace: "pre-line", mb: 3 }}>
                             {product.description}
                         </Typography>

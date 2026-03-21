@@ -1,5 +1,5 @@
 import { Menu, Search, ShoppingCart } from "@mui/icons-material";
-import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
+import { AppBar, IconButton, Toolbar } from "@mui/material";
 import { Image } from 'mui-image';
 import { useNavigate } from "react-router-dom";
 
