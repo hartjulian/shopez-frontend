@@ -31,7 +31,7 @@ export default function Products() {
   return (
     <Layout>
       <ProductGrid
-        products={loading ? Array.from(new Array(3)) : products}
+        products={loading ? Array.from(new Array(8)) : products}
         isLoading={loading}
       />
     </Layout>
