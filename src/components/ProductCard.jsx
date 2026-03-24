@@ -1,12 +1,12 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/cart/useCart";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
 export default function ProductCard({ product }) {
     const navigate = useNavigate();
-    const { dispatch, state } = useCart();
+    const { dispatch } = useCart();
 
     return (
         <Card

@@ -4,7 +4,7 @@ import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/
 import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/cart/useCart";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
