@@ -1,10 +1,12 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
 export default function ProductCard({ product }) {
     const navigate = useNavigate();
+    const { dispatch, state } = useCart();
 
     return (
         <Card
@@ -27,7 +29,7 @@ export default function ProductCard({ product }) {
                         component="img"
                         image={(product.image_url ? product.image_url : defaultImage)}
                         onError={(e) => {
-                            e.target.src=defaultImage;
+                            e.target.src = defaultImage;
                         }}
                         alt={product.name}
                         sx={{
@@ -60,15 +62,21 @@ export default function ProductCard({ product }) {
                         sx={{ fontWeight: 600, mt: 1 }}
                         color="primary"
                     >
-                        ${(product.price/100).toFixed(2)}
+                        ${(product.price / 100).toFixed(2)}
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <Box sx={{ p:2, pt: 0, mt: "auto" }}>
+            <Box sx={{ p: 2, pt: 0, mt: "auto" }}>
                 <Button
                     variant="contained"
                     fullWidth
-                    onClick={() => console.log("Add to cart", product.id)}
+                    onClick={() => {
+                        dispatch({
+                            type: "ADD_TO_CART",
+                            payload: {id: product.id, name: product.name, price: product.price, image_url: product.image_url}
+                        });
+                    }
+                    }
                 >
                     Add to Cart
                 </Button>

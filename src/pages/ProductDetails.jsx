@@ -4,6 +4,7 @@ import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/
 import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
+import { useCart } from "../context/CartContext";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
@@ -14,6 +15,7 @@ export default function ProductDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    const { dispatch } = useCart();
 
     useEffect(() => {
         getProductById(id)
@@ -110,7 +112,13 @@ export default function ProductDetails() {
                                             variant="contained"
                                             size="large"
                                             sx={{ minWidth: 200, mb: 3 }}
-                                            onClick={() => console.log("Add to cart", product.id)}
+                                            onClick={() => {
+                                                dispatch({
+                                                    type: "ADD_TO_CART",
+                                                    payload: { id: product.id, name: product.name, price: product.price, image_url: product.image_url }
+                                                });
+                                            }
+                                            }
                                         >
                                             Add to Cart
                                         </Button>
