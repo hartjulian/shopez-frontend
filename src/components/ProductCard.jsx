@@ -1,18 +1,16 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/cart/useCart";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
 export default function ProductCard({ product }) {
-    const navigate = useNavigate();
     const { dispatch } = useCart();
 
     return (
         <Card
             sx={{
                 width: "100%",
-                maxWidth: 300,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
@@ -23,7 +21,10 @@ export default function ProductCard({ product }) {
                 }
             }}
         >
-            <CardActionArea onClick={() => navigate(`/products/${product.id}`)}>
+            <CardActionArea
+                component={Link}
+                to={`/products/${product.id}`}
+            >
                 <Box sx={{ overflow: "hidden" }}>
                     <CardMedia
                         component="img"
@@ -60,7 +61,7 @@ export default function ProductCard({ product }) {
                     <Typography
                         variant="h6"
                         sx={{ fontWeight: 600, mt: 1 }}
-                        color="primary"
+                        color="text.secondary"
                     >
                         ${(product.price / 100).toFixed(2)}
                     </Typography>

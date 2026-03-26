@@ -9,11 +9,12 @@ const theme = createTheme({
             main: "#F59E0B"
         },
         background: {
-            default: "#F8FAFC",
+            default: "#F9FAFB",
             paper: "#FFFFFF"
         },
         text: {
-            primary: "#374151"
+            primary: "#374151",
+            secondary: "#6B7280"
         },
         divider: "#E5E7EB"
     },

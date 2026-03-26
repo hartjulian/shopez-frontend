@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/material";
 import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
@@ -14,7 +14,6 @@ export default function ProductDetails() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
     const { dispatch } = useCart();
 
     useEffect(() => {
@@ -44,7 +43,8 @@ export default function ProductDetails() {
                         variant="contained"
                         size="large"
                         color="secondary"
-                        onClick={() => navigate("/products")}
+                        component={Link}
+                        to="/products"
                     >
                         Back to Products
                     </Button>
@@ -67,6 +67,15 @@ export default function ProductDetails() {
                 <Box sx={{ visibility: loading ? "hidden" : "visible" }}>
                     {product && (
                         <Layout>
+                            <Button
+                                color="text.primary"
+
+                                component={Link}
+                                to="/products"
+                                sx={{ mb: 2 }}
+                            >
+                                ← Continue Shopping
+                            </Button>
                             <Grid container spacing={8} justifyContent={"center"}>
                                 {/* Image */}
                                 <Grid size={{ xs: 12, md: 6 }}>
@@ -103,7 +112,7 @@ export default function ProductDetails() {
                                         </Typography>
                                         <Typography
                                             variant="h5"
-                                            color="primary"
+                                            color="text.secondary"
                                             sx={{ fontWeight: 600, mb: 2 }}
                                         >
                                             ${(product.price / 100).toFixed(2)}

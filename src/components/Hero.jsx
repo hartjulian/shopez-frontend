@@ -1,8 +1,7 @@
 import { Box, Button, Container, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
-    const navigate = useNavigate();
 
     return (
         <Box
@@ -26,7 +25,8 @@ export default function Hero() {
                     variant="contained"
                     size="large"
                     color="secondary"
-                    onClick={() => navigate("/products")}
+                    component={Link}
+                    to="/products"
                 >
                     Browse Products
                 </Button>

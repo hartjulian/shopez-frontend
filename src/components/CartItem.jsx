@@ -1,6 +1,7 @@
 import { useCart } from "../context/cart/useCart";
 import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
 export default function CartItem({ item }) {
@@ -45,28 +46,33 @@ export default function CartItem({ item }) {
             {/* FAR LEFT: Image */}
             <Grid size={{ xs: 3, sm: 2 }}>
                 <Box
-                    component="img"
-                    src={item.image_url ? item.image_url : defaultImage}
-                    onError={(e) => {
-                        e.target.src = defaultImage;
-                    }}
-                    alt={item.name}
-                    sx={{
-                        width: "100%",
-                        maxHeight: 80,
-                        aspectRatio: "1 / 1",
-                        objectFit: "contain"
-                    }}
-                />
+                    component={Link}
+                    to={`/products/${item.id}`}
+                >
+                    <Box
+                        component="img"
+                        src={item.image_url ? item.image_url : defaultImage}
+                        onError={(e) => {
+                            e.target.src = defaultImage;
+                        }}
+                        alt={item.name}
+                        sx={{
+                            width: "100%",
+                            maxHeight: 80,
+                            aspectRatio: "1 / 1",
+                            objectFit: "contain"
+                        }}
+                    />
+                </Box>
             </Grid>
             {/* LEFT: Product Info */}
             <Grid size={{ xs: 9, sm: 4 }}>
-                <Typography variant="subtitle1" fontWeight={500} sx={{ textWrap: "balance"}} textAlign={{ xs: "right", sm: "left" }} mb={ 1 }>{item.name} </Typography>
-                <Typography textAlign={{ xs: "right", sm: "left" }}>${(item.price / 100).toFixed(2)}</Typography>
+                <Typography color="inherit" variant="subtitle1" fontWeight={500} sx={{ textDecoration: "none" }} textAlign={{ xs: "right", sm: "left" }} mb={1} component={Link} to={`/products/${item.id}`}>{item.name} </Typography>
+                <Typography color="text.secondary" >${(item.price / 100).toFixed(2)}</Typography>
             </Grid>
             {/* MIDDLE: Quantity controls */}
-            <Grid size={{ xs: 9, sm: 3 }} display="flex" flexDirection="column">
-                <Stack direction="row" spacing={1} alignItems="center" mb={ 1 }>
+            <Grid size={{ xs: 9, sm: 4 }} display="flex" flexDirection="column">
+                <Stack direction="row" spacing={1} alignItems="center" mb={1}>
                     <Button size="small" variant="outlined" onClick={handleDecrease} disabled={item.quantity === 1}>
                         -
                     </Button>
@@ -75,13 +81,13 @@ export default function CartItem({ item }) {
                         +
                     </Button>
                 </Stack>
-                <Typography noWrap fontWeight="bold">Total: ${(item.price*item.quantity/100).toFixed(2)}</Typography>
+                <Typography noWrap color="text.secondary" fontWeight="bold">Total: ${(item.price * item.quantity / 100).toFixed(2)}</Typography>
             </Grid>
             {/* RIGHT: Remove */}
-            <Grid size={{ xs: 3, sm: 3 }} display="flex" justifyContent="flex-end">
-            <IconButton onClick={handleRemove}>
-                <Delete />
-            </IconButton>
+            <Grid size={{ xs: 3, sm: 2 }} display="flex" justifyContent="flex-end">
+                <IconButton onClick={handleRemove}>
+                    <Delete />
+                </IconButton>
             </Grid>
         </Grid>
     );

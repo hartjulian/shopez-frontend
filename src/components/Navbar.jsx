@@ -16,10 +16,12 @@ export default function Navbar() {
                 <IconButton >
                     <Menu />
                 </IconButton>
-                <Box margin={"auto"}>
-                    <Link to="/">
+                <Box 
+                    margin={"auto"}
+                    component={Link}
+                    to="/"
+                >
                         <Image src={logoPlain} height="64px" fit="contain" duration="0" sx={{ cursor: "pointer" }} />
-                    </Link>
                 </Box>
                 <IconButton >
                     <Search />

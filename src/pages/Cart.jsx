@@ -2,7 +2,9 @@ import { useContext } from "react";
 import { CartContext } from "../context/cart/CartContext";
 import Layout from "../components/Layout";
 import CartItem from "../components/CartItem";
-import { Container, List, ListItem, Typography } from "@mui/material";
+import { Button, Container, Grid, List, ListItem, Typography } from "@mui/material";
+import CartSummary from "../components/CartSummary";
+import { Link } from "react-router-dom";
 
 
 export default function Cart() {
@@ -10,11 +12,22 @@ export default function Cart() {
 
     return (
         <Layout>
-            <Container maxWidth="md">
+            <Container maxWidth="lg">
                 <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
+                <Button
+                    color="text.primary"
+                    
+                    component={Link}    
+                    to="/products"
+                    sx={{ mb: 2 }}
+                >
+                    ← Continue Shopping
+                </Button>
                 {state.items.length === 0 ? (
                     <Typography>Your cart is empty</Typography>
                 ) : (
+                    <Grid container spacing={4}>
+                    <Grid size={{ xs: 12, md: 8 }}>
                     <List>
                         {state.items.map(item => (
                             <ListItem key={item.id} divider sx={{ py: 2 }}> 
@@ -22,6 +35,11 @@ export default function Cart() {
                             </ListItem>
                         ))}
                     </List>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                        <CartSummary />
+                    </Grid>
+                    </Grid>
                 )
                 }
             </Container>
