@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/cart/useCart";
+import { formatCurrency } from "../utils/formatCurrency";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
@@ -53,7 +54,8 @@ export default function ProductCard({ product }) {
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: "vertical",
                             overflow: "hidden",
-                            minHeight: "3.2em"
+                            minHeight: "3.2em",
+                            textWrap: "balance"
                         }}
                     >
                         {product.name}
@@ -63,7 +65,7 @@ export default function ProductCard({ product }) {
                         sx={{ fontWeight: 600, mt: 1 }}
                         color="text.secondary"
                     >
-                        ${(product.price / 100).toFixed(2)}
+                        {formatCurrency(product.price)}
                     </Typography>
                 </CardContent>
             </CardActionArea>

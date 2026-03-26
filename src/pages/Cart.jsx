@@ -15,9 +15,8 @@ export default function Cart() {
             <Container maxWidth="lg">
                 <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
                 <Button
-                    color="text.primary"
-                    
-                    component={Link}    
+                    color="inherit"
+                    component={Link}
                     to="/products"
                     sx={{ mb: 2 }}
                 >
@@ -27,18 +26,18 @@ export default function Cart() {
                     <Typography>Your cart is empty</Typography>
                 ) : (
                     <Grid container spacing={4}>
-                    <Grid size={{ xs: 12, md: 8 }}>
-                    <List>
-                        {state.items.map(item => (
-                            <ListItem key={item.id} divider sx={{ py: 2 }}> 
-                                <CartItem item={item} />
-                            </ListItem>
-                        ))}
-                    </List>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
-                        <CartSummary />
-                    </Grid>
+                        <Grid size={{ xs: 12, md: 8 }}>
+                            <List>
+                                {state.items.map(item => (
+                                    <ListItem key={item.id} divider sx={{ py: 2 }}>
+                                        <CartItem item={item} />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <CartSummary />
+                        </Grid>
                     </Grid>
                 )
                 }

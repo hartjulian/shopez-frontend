@@ -1,5 +1,6 @@
 import { useCart } from "../context/cart/useCart";
 import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
+import { formatCurrency } from "../utils/formatCurrency";
 
 export default function CartSummary() {
     const { state } = useCart();
@@ -16,7 +17,7 @@ export default function CartSummary() {
             <Stack spacing={1}>
                 <Box display="flex" justifyContent="space-between">
                     <Typography>Subtotal</Typography>
-                    <Typography color="text.secondary">${(subtotal/100).toFixed(2)}</Typography>
+                    <Typography color="text.secondary">{formatCurrency(subtotal)}</Typography>
                 </Box>
                 <Box display="flex" justifyContent="space-between">
                     <Typography>Shipping</Typography>
@@ -26,7 +27,7 @@ export default function CartSummary() {
                 <Box display="flex" justifyContent="space-between">
                     <Typography fontWeight={600}>Total</Typography>
                     <Typography textAlign="right" fontWeight={600} color="text.secondary">
-                        ${(subtotal/100).toFixed(2)} + shipping
+                        {formatCurrency(subtotal)} + shipping
                     </Typography>
                 </Box>
             </Stack>

@@ -2,6 +2,7 @@ import { useCart } from "../context/cart/useCart";
 import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { formatCurrency } from "../utils/formatCurrency";
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
 export default function CartItem({ item }) {
@@ -68,7 +69,7 @@ export default function CartItem({ item }) {
             {/* LEFT: Product Info */}
             <Grid size={{ xs: 9, sm: 4 }}>
                 <Typography color="inherit" variant="subtitle1" fontWeight={500} sx={{ textDecoration: "none" }} textAlign={{ xs: "right", sm: "left" }} mb={1} component={Link} to={`/products/${item.id}`}>{item.name} </Typography>
-                <Typography color="text.secondary" >${(item.price / 100).toFixed(2)}</Typography>
+                <Typography color="text.secondary">{formatCurrency(item.price)}</Typography>
             </Grid>
             {/* MIDDLE: Quantity controls */}
             <Grid size={{ xs: 9, sm: 4 }} display="flex" flexDirection="column">
@@ -81,7 +82,7 @@ export default function CartItem({ item }) {
                         +
                     </Button>
                 </Stack>
-                <Typography noWrap color="text.secondary" fontWeight="bold">Total: ${(item.price * item.quantity / 100).toFixed(2)}</Typography>
+                <Typography noWrap color="text.secondary" fontWeight="bold">Total: {formatCurrency(item.price * item.quantity)}</Typography>
             </Grid>
             {/* RIGHT: Remove */}
             <Grid size={{ xs: 3, sm: 2 }} display="flex" justifyContent="flex-end">

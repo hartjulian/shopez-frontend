@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/cart/useCart";
+import { formatCurrency } from "../utils/formatCurrency";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
@@ -107,7 +108,7 @@ export default function ProductDetails() {
                                 <Grid size={{ xs: 12, md: 6 }}>
                                     <Box sx={{ maxWidth: 500 }}>
                                         <Typography variant="h6" textTransform="uppercase" gutterBottom>{product.brand}</Typography>
-                                        <Typography variant="h4" gutterBottom>
+                                        <Typography variant="h4" gutterBottom sx={{ textWrap: "balance" }}>
                                             {product.name}
                                         </Typography>
                                         <Typography
@@ -115,7 +116,7 @@ export default function ProductDetails() {
                                             color="text.secondary"
                                             sx={{ fontWeight: 600, mb: 2 }}
                                         >
-                                            ${(product.price / 100).toFixed(2)}
+                                            {formatCurrency(product.price)}
                                         </Typography>
                                         <Button
                                             variant="contained"
