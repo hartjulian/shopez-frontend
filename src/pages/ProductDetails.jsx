@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/material";
 import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
+import { useCart } from "../context/cart/useCart";
+import { formatCurrency } from "../utils/formatCurrency";
 
 import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
 
@@ -13,7 +15,7 @@ export default function ProductDetails() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
+    const { dispatch } = useCart();
 
     useEffect(() => {
         getProductById(id)
@@ -42,7 +44,8 @@ export default function ProductDetails() {
                         variant="contained"
                         size="large"
                         color="secondary"
-                        onClick={() => navigate("/products")}
+                        component={Link}
+                        to="/products"
                     >
                         Back to Products
                     </Button>
@@ -65,6 +68,15 @@ export default function ProductDetails() {
                 <Box sx={{ visibility: loading ? "hidden" : "visible" }}>
                     {product && (
                         <Layout>
+                            <Button
+                                color="text.primary"
+
+                                component={Link}
+                                to="/products"
+                                sx={{ mb: 2 }}
+                            >
+                                ← Continue Shopping
+                            </Button>
                             <Grid container spacing={8} justifyContent={"center"}>
                                 {/* Image */}
                                 <Grid size={{ xs: 12, md: 6 }}>
@@ -96,21 +108,27 @@ export default function ProductDetails() {
                                 <Grid size={{ xs: 12, md: 6 }}>
                                     <Box sx={{ maxWidth: 500 }}>
                                         <Typography variant="h6" textTransform="uppercase" gutterBottom>{product.brand}</Typography>
-                                        <Typography variant="h4" gutterBottom>
+                                        <Typography variant="h4" gutterBottom sx={{ textWrap: "balance" }}>
                                             {product.name}
                                         </Typography>
                                         <Typography
                                             variant="h5"
-                                            color="primary"
+                                            color="text.secondary"
                                             sx={{ fontWeight: 600, mb: 2 }}
                                         >
-                                            ${(product.price / 100).toFixed(2)}
+                                            {formatCurrency(product.price)}
                                         </Typography>
                                         <Button
                                             variant="contained"
                                             size="large"
                                             sx={{ minWidth: 200, mb: 3 }}
-                                            onClick={() => console.log("Add to cart", product.id)}
+                                            onClick={() => {
+                                                dispatch({
+                                                    type: "ADD_TO_CART",
+                                                    payload: { id: product.id, name: product.name, price: product.price, image_url: product.image_url }
+                                                });
+                                            }
+                                            }
                                         >
                                             Add to Cart
                                         </Button>
