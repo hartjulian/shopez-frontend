@@ -3,7 +3,7 @@ import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material"
 import { Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency";
-import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
+import ProductImage from "./ProductImage";
 
 export default function CartItem({ item }) {
     const { dispatch } = useCart();
@@ -50,18 +50,11 @@ export default function CartItem({ item }) {
                     component={Link}
                     to={`/products/${item.id}`}
                 >
-                    <Box
-                        component="img"
-                        src={item.image_url ? item.image_url : defaultImage}
-                        onError={(e) => {
-                            e.target.src = defaultImage;
-                        }}
-                        alt={item.name}
+                    <ProductImage
+                        product={item}
                         sx={{
-                            width: "100%",
                             maxHeight: 80,
-                            aspectRatio: "1 / 1",
-                            objectFit: "contain"
+                            aspectRatio: "1 / 1"
                         }}
                     />
                 </Box>

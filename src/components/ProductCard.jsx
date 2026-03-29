@@ -2,8 +2,8 @@ import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, 
 import { Link } from "react-router-dom";
 import { useCart } from "../context/cart/useCart";
 import { formatCurrency } from "../utils/formatCurrency";
-
-import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
+import { mapProductToCartItem } from "../utils/cartUtils";
+import ProductImage from "./ProductImage";
 
 export default function ProductCard({ product }) {
     const { dispatch } = useCart();
@@ -26,24 +26,16 @@ export default function ProductCard({ product }) {
                 component={Link}
                 to={`/products/${product.id}`}
             >
-                <Box sx={{ overflow: "hidden" }}>
-                    <CardMedia
-                        component="img"
-                        image={(product.image_url ? product.image_url : defaultImage)}
-                        onError={(e) => {
-                            e.target.src = defaultImage;
-                        }}
-                        alt={product.name}
-                        sx={{
-                            aspectRatio: "1 / 1",
-                            objectFit: "scale-down",
-                            transition: "transform 0.4s ease",
-                            "&:hover": {
-                                transform: "scale(1.15)"
-                            }
-                        }}
-                    />
-                </Box>
+                <ProductImage 
+                    product={product}
+                    sx={{
+                        aspectRatio: "1 / 1",
+                        transition: "transform 0.4s ease",
+                        "&:hover": {
+                            transform: "scale(1.15)"
+                        }
+                    }}
+                />
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Typography fontWeight={"bold"} textTransform={"uppercase"}>{product.brand}</Typography>
                     <Typography
@@ -76,7 +68,7 @@ export default function ProductCard({ product }) {
                     onClick={() => {
                         dispatch({
                             type: "ADD_TO_CART",
-                            payload: {id: product.id, name: product.name, price: product.price, image_url: product.image_url}
+                            payload: mapProductToCartItem(product)
                         });
                     }
                     }
