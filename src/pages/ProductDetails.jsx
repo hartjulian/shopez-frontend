@@ -6,8 +6,9 @@ import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/cart/useCart";
 import { formatCurrency } from "../utils/formatCurrency";
+import { mapProductToCartItem } from "../utils/cartUtils";
 
-import defaultImage from '/src/assets/ShopEZ_logo_plain.png';
+import ProductImage from "../components/ProductImage";
 
 
 export default function ProductDetails() {
@@ -89,15 +90,9 @@ export default function ProductDetails() {
                                             overflow: "hidden",
                                         }}
                                     >
-                                        <CardMedia
-                                            component="img"
-                                            image={product.image_url ? product.image_url : defaultImage}
-                                            onError={(e) => {
-                                                e.target.src = defaultImage;
-                                            }}
-                                            alt={product.name}
+                                        <ProductImage
+                                            product={product}
                                             sx={{
-                                                width: "100%",
                                                 aspectRatio: "1 / 1",
                                                 objectFit: "scale-down"
                                             }}
@@ -125,7 +120,7 @@ export default function ProductDetails() {
                                             onClick={() => {
                                                 dispatch({
                                                     type: "ADD_TO_CART",
-                                                    payload: { id: product.id, name: product.name, price: product.price, image_url: product.image_url }
+                                                    payload: mapProductToCartItem(product)
                                                 });
                                             }
                                             }
