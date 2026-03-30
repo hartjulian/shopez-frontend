@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { getImageUrl } from "../utils/getImageUrl";
 
@@ -9,12 +9,18 @@ export default function ProductImage({
     ...props
 }) {
     const [src, setSrc] = useState(getImageUrl(product));
+    const defaultImage = "/src/assets/ShopEZ_logo_plain.jpg"
+    const isFallback = !product.image_url;
+
+    useEffect(() => {
+        setSrc(getImageUrl(product));  
+    }, [product])
 
     const handleError = () => {
-        setSrc("/src/assets/ShopEZ_logo_plain.jpg")
+        if (src !== defaultImage) {
+            setSrc(defaultImage);
+        }
     };
-
-    const isFallback = !product.image_url;
 
     return (
         <Box
@@ -24,7 +30,8 @@ export default function ProductImage({
             onError={handleError}
             sx={{
                 width: "100%",
-                objectFit: "contain",
+                objectFit: "cover",
+                aspectRatio: "1 / 1",
                 opacity: isFallback ? 0.85 : 1,
                 filter: isFallback ? "grayscale(20%)" : "none",
                 ...sx

@@ -92,10 +92,6 @@ export default function ProductDetails() {
                                     >
                                         <ProductImage
                                             product={product}
-                                            sx={{
-                                                aspectRatio: "1 / 1",
-                                                objectFit: "scale-down"
-                                            }}
                                         />
                                     </Box>
                                 </Grid>
