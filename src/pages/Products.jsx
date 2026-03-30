@@ -1,29 +1,17 @@
-import Layout from "../components/Layout";
 import ProductGrid from "../components/ProductGrid";
-import { useEffect, useState } from "react";
-import { getProducts } from "../api/products";
+import { useState } from "react";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import FilterBar from "../components/FilterBar";
+import { useOutletContext } from "react-router-dom";
 
 
 export default function Products() {
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortOption, setSortOption] = useState("rating-desc");
 
-  useEffect(() => {
-    getProducts()
-      .then(data => setProducts(data))
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      })
-      .then(() => setLoading(false));
-  }, []);
+  const { products, loading, error } = useOutletContext();
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -38,15 +26,13 @@ export default function Products() {
   });
 
   if (error) return (
-    <Layout>
       <Container sx={{ py: 10 }} align="center">
         <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Something went wrong</Typography>
       </Container>
-    </Layout>
   )
   return (
-    <Layout>
-      <Paper sx={{ p: 2, mb: 3, maxWidth: "1200px", justifySelf: {sm: "center"}, width: "100%" }}>
+    <>
+      <Paper sx={{ p: 2, mb: 3, maxWidth: "1200px", justifySelf: { sm: "center" }, width: "100%" }}>
         <FilterBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -65,6 +51,6 @@ export default function Products() {
         products={loading ? Array.from(new Array(8)) : filteredProducts}
         isLoading={loading}
       />
-    </Layout>
+      </>
   );
 }

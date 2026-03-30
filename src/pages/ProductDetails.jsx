@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/material";
-import Layout from "../components/Layout";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/cart/useCart";
@@ -29,30 +28,25 @@ export default function ProductDetails() {
     }, [id, loading]);
     // Error case - e.g. API unavailable
     if (error) return (
-        <Layout>
-            <Container sx={{ py: 10 }} align="center">
-                <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Something went wrong</Typography>
-            </Container>
-        </Layout>
+        <Container sx={{ py: 10 }} align="center">
+            <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Something went wrong</Typography>
+        </Container>
     );
     // Valid non-error case where product isn't found. Perhaps user has copied or modified a link incorrectly
     if (!product && !loading) {
         return (
-            <Layout>
-                <Container sx={{ py: 10 }} align="center">
-                    <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Product not found</Typography>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="secondary"
-                        component={Link}
-                        to="/products"
-                    >
-                        Back to Products
-                    </Button>
-                </Container>
-
-            </Layout>
+            <Container sx={{ py: 10 }} align="center">
+                <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>Oops! Product not found</Typography>
+                <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    component={Link}
+                    to="/products"
+                >
+                    Back to Products
+                </Button>
+            </Container>
         )
     };
     // Happy path
@@ -68,7 +62,7 @@ export default function ProductDetails() {
             <Fade in={!loading} timeout={500}>
                 <Box sx={{ visibility: loading ? "hidden" : "visible" }}>
                     {product && (
-                        <Layout>
+                        <>
                             <Button
                                 color="text.primary"
 
@@ -130,7 +124,7 @@ export default function ProductDetails() {
                                 </Grid>
 
                             </Grid>
-                        </Layout>
+                        </>
                     )}
                 </Box>
             </Fade>
