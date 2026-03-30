@@ -53,8 +53,7 @@ export default function CartItem({ item }) {
                     <ProductImage
                         product={item}
                         sx={{
-                            maxHeight: 80,
-                            aspectRatio: "1 / 1"
+                            maxHeight: 80
                         }}
                     />
                 </Box>

@@ -23,9 +23,6 @@ export default function Navbar() {
                 >
                         <Image src={logoPlain} height="64px" fit="contain" duration="0" sx={{ cursor: "pointer" }} />
                 </Box>
-                <IconButton >
-                    <Search />
-                </IconButton>
                 <IconButton component={Link} to="/cart">
                     <Badge badgeContent={totalItems} color="secondary">
                         <ShoppingCart />

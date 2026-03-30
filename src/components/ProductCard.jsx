@@ -29,7 +29,6 @@ export default function ProductCard({ product }) {
                 <ProductImage 
                     product={product}
                     sx={{
-                        aspectRatio: "1 / 1",
                         transition: "transform 0.4s ease",
                         "&:hover": {
                             transform: "scale(1.15)"
