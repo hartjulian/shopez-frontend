@@ -1,13 +1,13 @@
 import { useCart } from "../context/cart/useCart";
 import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "../utils/formatCurrency";
+import { calculateSubtotal } from "../utils/cartUtils";
 
 export default function CartSummary() {
     const { state } = useCart();
 
-    const subtotal = state.items.reduce((total, item) => {
-        return total + (item.price * item.quantity);
-    }, 0);
+    const subtotal = calculateSubtotal(state.items);
+
 
     return (
         <Paper sx={{ p: 2, boxShadow: 1 }}>
