@@ -1,7 +1,8 @@
 import { useCart } from "../context/cart/useCart";
-import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "../utils/formatCurrency";
 import { calculateSubtotal } from "../utils/cartUtils";
+import { Link } from "react-router-dom";
 
 export default function CartSummary() {
     const { state } = useCart();
@@ -31,6 +32,26 @@ export default function CartSummary() {
                     </Typography>
                 </Box>
             </Stack>
+            <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                fullWidth
+                component={Link}
+                to="/checkout"
+                sx={{ mt: 2 }}
+            >
+                Proceed to Checkout
+            </Button>
+            <Button
+                variant="text"
+                component={Link}
+                to="/products"
+                fullWidth
+                sx={{ mt: 1 }}
+            >
+                Continue Shopping
+            </Button>
         </Paper>
     );
 }
