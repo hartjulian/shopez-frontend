@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Typography, } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useCart } from "../context/cart/useCart";
 import { formatCurrency } from "../utils/formatCurrency";
 import { mapProductToCartItem } from "../utils/cartUtils";
@@ -7,6 +7,7 @@ import ProductImage from "./ProductImage";
 
 export default function ProductCard({ product }) {
     const { dispatch } = useCart();
+    const { showSnackBar } = useOutletContext();
 
     return (
         <Card
@@ -69,6 +70,7 @@ export default function ProductCard({ product }) {
                             type: "ADD_TO_CART",
                             payload: mapProductToCartItem(product)
                         });
+                        showSnackBar(`${product.name} added to cart`);
                     }
                     }
                 >
