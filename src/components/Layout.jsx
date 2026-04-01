@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Alert, Box, Button, Container, Snackbar } from "@mui/material";
 import { getProducts } from "../api/products";
+import BackToTop from "./BackToTop";
 
 
 export default function Layout() {
@@ -52,6 +53,7 @@ export default function Layout() {
           {snackBar.message}
         </Alert>
       </Snackbar>
+      <BackToTop />
     </Box>
   );
 }
