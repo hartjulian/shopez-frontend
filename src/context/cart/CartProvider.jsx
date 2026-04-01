@@ -42,6 +42,13 @@ function cartReducer(state, action) {
                 )
             };
         }
+        case "CLEAR_CART": {
+            return {
+                ...state,
+                items: []
+            };
+
+        }
         default:
             return state;
     };

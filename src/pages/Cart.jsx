@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { CartContext } from "../context/cart/CartContext";
 import CartItem from "../components/CartItem";
 import { Button, Container, Grid, List, ListItem, Typography } from "@mui/material";
 import CartSummary from "../components/CartSummary";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/cart/useCart";
 
 
 export default function Cart() {
-    const { state } = useContext(CartContext);
+    const { state } = useCart();
 
     return (
         <Container maxWidth="lg">
