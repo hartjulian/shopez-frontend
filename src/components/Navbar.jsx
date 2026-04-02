@@ -47,7 +47,7 @@ export default function Navbar() {
                                 <ListItemText primary={`Cart (${totalItems})`} />
                             </ListItemButton>
                             <ListItemButton component={Link} to="/checkout" disabled={ totalItems < 1 }>
-                                <ShoppingCartIcon sx={{ mr: 2 }} />
+                                <PaymentIcon sx={{ mr: 2 }} />
                                 <ListItemText primary="Checkout" />
                             </ListItemButton>
                         </List>
