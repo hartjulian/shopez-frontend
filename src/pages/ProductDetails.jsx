@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Box, Button, CardMedia, Container, Fade, Grid, Typography } from "@mui/material";
+import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Box, Button, Container, Fade, Grid, Typography } from "@mui/material";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/cart/useCart";
@@ -16,6 +16,8 @@ export default function ProductDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const { dispatch } = useCart();
+
+    const { showSnackBar } = useOutletContext();
 
     useEffect(() => {
         getProductById(id)
@@ -112,6 +114,7 @@ export default function ProductDetails() {
                                                     type: "ADD_TO_CART",
                                                     payload: mapProductToCartItem(product)
                                                 });
+                                                showSnackBar(`${product.name} added to cart`);
                                             }
                                             }
                                         >

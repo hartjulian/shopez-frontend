@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import FilterBar from "../components/FilterBar";
 import { useOutletContext } from "react-router-dom";
-
+import useDebounce from "../hooks/useDebounce";
 
 export default function Products() {
 
@@ -12,9 +12,10 @@ export default function Products() {
   const [sortOption, setSortOption] = useState("rating-desc");
 
   const { products, loading, error } = useOutletContext();
+  const debouncedSearch = useDebounce(searchTerm, 300);
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = product.name.toLowerCase().includes(debouncedSearch.toLowerCase());
     const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
 
     return matchesSearch && matchesCategory;

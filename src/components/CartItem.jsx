@@ -1,6 +1,6 @@
 import { useCart } from "../context/cart/useCart";
 import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency";
 import ProductImage from "./ProductImage";
@@ -79,7 +79,7 @@ export default function CartItem({ item }) {
             {/* RIGHT: Remove */}
             <Grid size={{ xs: 3, sm: 2 }} display="flex" justifyContent="flex-end">
                 <IconButton onClick={handleRemove}>
-                    <Delete />
+                    <DeleteIcon />
                 </IconButton>
             </Grid>
         </Grid>
